@@ -1,0 +1,270 @@
+@model dacon_exam.Models.Cml
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <meta charset="UTF-8">
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+
+            <style>
+                body {
+                    color: #566787;
+                                background: #f5f5f5;
+                                font-family: 'Varela Round', sans-serif;
+                                font-size: 13px;
+                      }
+                      .table-wrapper {
+                    background: #fff;
+                    padding: 20px 25px;
+                    margin: 30px 0;
+                                border-radius: 3px;
+                    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+                }
+                      .table-title {        
+                                padding-bottom: 15px;
+                                background: #435d7d;
+                                color: #fff;
+                                padding: 16px 30px;
+                                margin: -20px -25px 10px;
+                                border-radius: 3px 3px 0 0;
+                }
+                .table-title h2 {
+                                margin: 5px 0 0;
+                                font-size: 24px;
+                                
+                      }
+                      .table-title .btn-group {
+                                float: right;
+                      }
+                      .table-title .btn {
+                                color: #fff;
+                                float: right;
+                                font-size: 13px;
+                                border: none;
+                                min-width: 50px;
+                                border-radius: 2px;
+                                border: none;
+                                outline: none !important;
+                                margin-left: 10px;
+                      }
+                      .table-title .btn i {
+                                float: left;
+                                font-size: 21px;
+                                margin-right: 5px;
+                      }
+                      .table-title .btn span {
+                                float: left;
+                                margin-top: 2px;
+                      }
+                table.table tr th, table.table tr td {
+                    border-color: #e9e9e9;
+                                padding: 12px;
+                                vertical-align: middle;
+                }
+                     
+                
+            </style>    
+</head>
+
+ <br>  <br>  <br>  <br>  <br>  <br>  <br>           
+    <div class="container">
+        
+                    <div class="table-wrapper">
+                      <div class="table-title">
+                        <div class="row">
+                          
+                          
+                        <h5 class="text-center"><b>LINE NUMBER: @ViewBag.data</b> </h5>
+                       
+                          <div class="col-sm-6">
+                            <h2>CML</h2>
+                          </div>
+                          <div class="col-sm-6">
+                            <a asp-action="Create" asp-controller="Cml"  asp-route-id="@ViewBag.id" class="btn btn-success ">Add CML</a>
+                          </div>
+                        </div>
+                      </div>
+                      <table class="table">
+                          
+                            <thead class="text-muted">
+                                <tr>
+                                    <th class="text-left" width="200">CML number</th>
+                                    <th class="text-left" width="150">CML description</th>
+                                    <th class="text-left" width="250">Actual outside diameter</th>
+                                    <th class="text-left" width="250">Design thickness (mm)</th>
+                                    <th class="text-left" width="150">Structual thickness (mm)</th>
+                                    <th class="text-left" width="150">Required</th>
+                                    <th class="text-left" width="300">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            
+                               @foreach (var item in ViewBag.Cml)
+                                        {   
+                                            <tr>    
+                                            
+                                                    <td>@item.cml_number</td>
+                                                    <td>@item.cml_description</td>
+                                                    <td>@item.actual_outside_diameter</td>
+                                                    <td>@item.design_thickness</td>
+                                                    <td>@item.structural_thickness</td>
+                                                    <td>@item.required_thickness</td>
+                                                    <td>
+                                                        
+                                                        <a asp-action="Index" asp-controller="TestPoint" class="btn btn-info" asp-route-id="@item.cml_id"
+                                                        asp-route-id2="@item.info_id">
+                                                            View TP
+                                                        </a>  
+                                                        
+                                                        
+                                                        <button class="btn btn-md btn-warning" onclick="GetData('@item.cml_id');">Edit</button>
+                                                        
+                                                        <a asp-action="Delete" asp-controller="Cml"  asp-route-id="@item.cml_id" class="btn btn-md btn-danger" onclick="return confirm('Are you sure to delete this record?')">
+                                                        Delete
+                                                        </a>
+                                                    </td>
+                                                
+                                            </tr>
+                                        }
+                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             </div>
+           </div>
+        </div>
+      <div class="col-md-12 text-center my-2">
+               
+                <a asp-action="Index" asp-controller="Info" class="btn btn-primary">ย้อนกลับ</a>
+        </div>
+    
+    </div>
+    
+
+     
+
+    <form asp-action="Edit" asp-controller="Cml" method="post">
+        
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">CML INFOMATION</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="row">
+                                    
+                    <input type="hidden" asp-for="cml_id">        
+                    <div class="form-group">
+                        <label>Cml number:</label>
+                        <input asp-for="cml_number" type="number" class="form-control" placeholder="Cml number" >
+                    </div>
+                    <div class="form-group">
+                         <label>Cml description:</label>
+                        <input asp-for="cml_description" type="text" class="form-control" placeholder="cml description" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Actual outside diameter (mm):</label>
+                        <input asp-for="actual_outside_diameter" type="number" class="form-control" placeholder="actual outside diameter"  readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>design thickness (mm):</label>
+                        <input asp-for="design_thickness" type="number" class="form-control" placeholder="design thickness"  readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>structural thickness (mm):</label>
+                        <input asp-for="structural_thickness" type="number" class="form-control" placeholder="structural thickness" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>required thickness (mm):</label>
+                        <input asp-for="required_thickness" type="number" class="form-control" placeholder="required thickness" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                    </div>
+                    
+                        <center>
+                            <button type="submit" class="btn btn-primary">แก้ไขข้อมูล</button>
+                           <a asp-action="Index" asp-controller="Cml" asp-route-id="@ViewBag.ID"  class="btn btn-secondary">ยกเลิก</a>
+                        </center>
+                    </div>
+                </div>
+                                                                 
+            </div>
+                    
+        </div>
+   
+    
+    
+    </form>
+    
+
+<script type="text/javascript">
+        $(function() {
+            $.fn.datepicker.defaults.format = "dd/mm/yyyy";
+            $('#datepicker').datepicker();
+            
+        });
+
+        function GetData(v) {
+
+            $.ajax(
+                {
+                    url: '@Url.Action("GetData", "Cml")',
+
+                    dataType: "json",
+
+                    data: JSON.stringify(
+                        {
+                            "cml_id" : v
+
+                        }),
+
+
+                    contentType: "application/json; charset=utf-8",
+
+                    type: "POST",
+
+                    success: function (response) {
+
+                        $("#cml_id").val(response["cml_id"]);
+                        $("#cml_number").val(response["cml_number"]);
+                        $("#cml_description").val(response["cml_description"]);
+                        $("#actual_outside_diameter").val(response["actual_outside_diameter"]);
+                        $("#design_thickness").val(response["design_thickness"]);
+                        $("#structural_thickness").val(response["structural_thickness"]);
+                        $("#required_thickness").val(response["required_thickness"]);
+                
+                    
+
+                        $('#exampleModal').modal('show');
+                    },
+
+                    error: function (data) {
+
+
+                    }
+
+
+            })
+    }
+    </script>
+</html>

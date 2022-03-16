@@ -1,0 +1,83 @@
+@model dacon_exam.Models.Cml
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <meta charset="UTF-8">
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+</head>
+<body>
+
+<br>  <br>  <br>  <br>  <br>  <br>  
+<div class="container">
+    <form asp-action="Create" asp-area="Cml" method="post">
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                <div class="col-lg-12">
+                    <h3 align="center">ADD CML</h3>
+                    @* <input type="hidden" name="cml_number" id="cml_number">  *@
+                    <div class="form-group">
+                        <label>CML number</label>
+                        <input asp-for="cml_number" type="text" class="form-control" placeholder="cml number"   tabindex="2" required>
+                    </div>
+                    
+                    
+                    <div class="form-group">
+                        <label>CML description</label>
+                        <input asp-for="cml_description" type="text" class="form-control" placeholder="cml description"   tabindex="2" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Actual outside diameter</label>
+                        <input asp-for="actual_outside_diameter" type="number" class="form-control" placeholder="actual outside diameter" value=@ViewBag.actual_outside_diameter tabindex="3" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Design thickness (mm)</label>
+                        <input asp-for="design_thickness" type="number" class="form-control" placeholder="design thickness" value=@ViewBag.design_thickness tabindex="4" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Structural thickness (mm)</label>
+                        <input asp-for="structural_thickness" type="number" class="form-control" placeholder="structural thickness" value=@ViewBag.structural_thickness tabindex="5" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Required thickness (mm)</label>
+                        <input asp-for="required_thickness" type="number"class="form-control" value=@ViewBag.required_thickness placeholder="required thickness" tabindex="6" readonly>
+                    </div>
+                    @* <input type="hidden" asp-for="Student_createdDate" /> *@
+                    <div class="form-group">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                    </div>
+                    
+                        <center>
+                            <button type="submit" class="btn btn-primary">เพิ่มข้อมูล</button>
+                            <a asp-action="Index" asp-controller="Cml" asp-route-id="@ViewBag.ID" class="btn btn-secondary">ยกเลิก</a>
+                        </center>
+                    </div>
+                </div>
+            </div>
+          </div>
+     </form>
+   </div>
+</body>
+
+<script type="text/javascript">
+        $(function() {
+            $.fn.datepicker.defaults.format = "dd/mm/yyyy";
+            $('#datepicker').datepicker();
+            
+        });
+
+}
+    </script>
+</html>
